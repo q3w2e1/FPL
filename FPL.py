@@ -1,33 +1,38 @@
-konzultace = {
-    "experience" : (100, 100),
-    "OOP" : (10, 70),
-    "repos" : (100, 40),
-    "multi" : (70, 80),
-    "pointer" : (12, 15),
-    "highlev" : (20, 80)
-}
 import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
-import copy
 import pprint
 
-output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
+from constants import consultation
+from constants import output_languages
 
+
+mfs_dict = {}
+
+for lang in output_languages:
+    mfs_dict[lang] = ctrl.Consequent(np.arange(0, 100, 1), lang)
+
+    
+
+# creation of membership functions of consequents
 c_lang = ctrl.Consequent(np.arange(0, 100, 1), 'c_lang')
-c_lang.automf(7)
 cpp_lang = ctrl.Consequent(np.arange(0, 100, 1), 'cpp_lang')
-cpp_lang.automf(7)
 csharp_lang = ctrl.Consequent(np.arange(0, 100, 1), 'csharp_lang')
-csharp_lang.automf(7)
 fortran_lang = ctrl.Consequent(np.arange(0, 100, 1), 'fortran_lang')
-fortran_lang.automf(7)
 java_lang = ctrl.Consequent(np.arange(0, 100, 1), 'java_lang')
-java_lang.automf(7)
 pascal_lang = ctrl.Consequent(np.arange(0, 100, 1), 'pascal_lang')
-pascal_lang.automf(7)
 python_lang = ctrl.Consequent(np.arange(0, 100, 1), 'python_lang')
+
+
+c_lang.automf(7)
+cpp_lang.automf(7)
+csharp_lang.automf(7)
+fortran_lang.automf(7)
+java_lang.automf(7)
+pascal_lang.automf(7)
 python_lang.automf(7)
+
+
 
 # python_lang['average'].view()
 
@@ -102,8 +107,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_experience = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_experience_simulation = ctrl.ControlSystemSimulation(ctrl_experience, flush_after_run=100)
 
-question_experience_simulation.input['answer_yn'] = konzultace["experience"][0]
-question_experience_simulation.input['question_care'] = konzultace["experience"][1]
+question_experience_simulation.input['answer_yn'] = consultation["experience"][0]
+question_experience_simulation.input['question_care'] = consultation["experience"][1]
 
 try:
     question_experience_simulation.compute()
@@ -156,8 +161,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_OOP = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_OOP_simulation = ctrl.ControlSystemSimulation(ctrl_OOP, clip_to_bounds=True, flush_after_run=100)
 
-question_OOP_simulation.input['answer_yn'] = konzultace["OOP"][0]
-question_OOP_simulation.input['question_care'] = konzultace["OOP"][1]
+question_OOP_simulation.input['answer_yn'] = consultation["OOP"][0]
+question_OOP_simulation.input['question_care'] = consultation["OOP"][1]
 
 # question_care.view(question_OOP_simulation)
 # answer_yn.view(question_OOP_simulation)
@@ -213,8 +218,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_repos = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_repos_simulation = ctrl.ControlSystemSimulation(ctrl_repos, clip_to_bounds=True, flush_after_run=100)
 
-question_repos_simulation.input['answer_yn'] = konzultace["repos"][0]
-question_repos_simulation.input['question_care'] = konzultace["repos"][1]
+question_repos_simulation.input['answer_yn'] = consultation["repos"][0]
+question_repos_simulation.input['question_care'] = consultation["repos"][1]
 try:
     question_repos_simulation.compute()
     # python_lang.view(sim=question_repos_simulation)
@@ -266,8 +271,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_multi = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_multi_simulation = ctrl.ControlSystemSimulation(ctrl_multi, clip_to_bounds=True, flush_after_run=100)
 
-question_multi_simulation.input['answer_yn'] = konzultace["multi"][0]
-question_multi_simulation.input['question_care'] = konzultace["multi"][1]
+question_multi_simulation.input['answer_yn'] = consultation["multi"][0]
+question_multi_simulation.input['question_care'] = consultation["multi"][1]
 try:
     question_multi_simulation.compute()
     # python_lang.view(sim=question_multi_simulation)
@@ -319,8 +324,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_pointer = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_pointer_simulation = ctrl.ControlSystemSimulation(ctrl_pointer, clip_to_bounds=True, flush_after_run=100)
 
-question_pointer_simulation.input['answer_yn'] = konzultace["pointer"][0]
-question_pointer_simulation.input['question_care'] = konzultace["pointer"][1]
+question_pointer_simulation.input['answer_yn'] = consultation["pointer"][0]
+question_pointer_simulation.input['question_care'] = consultation["pointer"][1]
 try:
     question_pointer_simulation.compute()
     # python_lang.view(sim=question_pointer_simulation)
@@ -372,8 +377,8 @@ rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
 ctrl_highlev = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
 question_highlev_simulation = ctrl.ControlSystemSimulation(ctrl_highlev, clip_to_bounds=True, flush_after_run=100)
 
-question_highlev_simulation.input['answer_yn'] = konzultace["highlev"][0]
-question_highlev_simulation.input['question_care'] = konzultace["highlev"][1]
+question_highlev_simulation.input['answer_yn'] = consultation["highlev"][0]
+question_highlev_simulation.input['question_care'] = consultation["highlev"][1]
 try:
     question_highlev_simulation.compute()
     # python_lang.view(sim=question_highlev_simulation)
@@ -387,7 +392,6 @@ except:
 # print(question_pointer_simulation.output)
 # print(question_highlev_simulation.output)
 
-output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
 final_score = {}
 
 for lang in output_languages:
