@@ -1,11 +1,11 @@
 from skfuzzy import control as ctrl
-from deps.constants import consultation
+from deps.constants_consul import consultation
 
 def rules_OOP(answer_yn, question_care, consequents):
     # OOP question --- "Hľadáte support OOP?"
-    # Do you need OOP (object oriented programming) support? 
+    # Do you need OOP (object oriented programming) support?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
-        consequents["c_lang"]['good'],
+        consequents["C-language"]['good'],
         consequents["cpp_lang"]['poor'],
         consequents["csharp_lang"]['poor'],
         consequents["fortran_lang"]['poor'],
@@ -13,7 +13,7 @@ def rules_OOP(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['good'],
         consequents["python_lang"]['poor']))
     rule2 = ctrl.Rule(answer_yn['No'] & question_care['I do care'], (
-        consequents["c_lang"]['excellent'],
+        consequents["C-language"]['excellent'],
         consequents["cpp_lang"]['dismal'],
         consequents["csharp_lang"]['dismal'],
         consequents["fortran_lang"]['dismal'],
@@ -21,7 +21,7 @@ def rules_OOP(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['excellent'],
         consequents["python_lang"]['dismal']))
     rule3 = ctrl.Rule(answer_yn['I do not know'] & question_care['I do care'], (
-        consequents["c_lang"]['average'],
+        consequents["C-language"]['average'],
         consequents["cpp_lang"]['average'],
         consequents["csharp_lang"]['average'],
         consequents["fortran_lang"]['average'],
@@ -29,7 +29,7 @@ def rules_OOP(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['average'],
         consequents["python_lang"]['average']))
     rule4 = ctrl.Rule(answer_yn['Yes'] & question_care['I do not care'], (
-        consequents["c_lang"]['poor'],
+        consequents["C-language"]['poor'],
         consequents["cpp_lang"]['good'],
         consequents["csharp_lang"]['good'],
         consequents["fortran_lang"]['good'],
@@ -37,7 +37,7 @@ def rules_OOP(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['poor'],
         consequents["python_lang"]['good']))
     rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
-        consequents["c_lang"]['dismal'],
+        consequents["C-language"]['dismal'],
         consequents["cpp_lang"]['excellent'],
         consequents["csharp_lang"]['excellent'],
         consequents["fortran_lang"]['excellent'],

@@ -2,18 +2,41 @@ from skfuzzy import control as ctrl
 import numpy as np
 import skfuzzy as fuzz
 
-# these are answers of the reader/user
+# mimicking answers of the reader/user
 consultation = {
-    "experience" : (100, 100),
-    "OOP" : (10, 70),
-    "repos" : (100, 40),
-    "multi" : (70, 80),
-    "pointer" : (12, 15),
+    "experience" : (5, 50),
+    "OOP" : (10, 20),
+    "repos" : (50, 40),
+    "multi" : (13, 20),
+    "pointer" : (50, 15),
     "highlev" : (20, 80)
 }
 
+# alternative consulation (input from keyboard)
+# consultation = {}
+# answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["experience"] = (int(answer), int(weight))
+# answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["OOP"] = (int(answer), int(weight))
+# answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["repos"] = (int(answer), int(weight))
+# answer = input("Do you need a language with multithread support? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["multi"] = (int(answer), int(weight))
+# answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["pointer"] = (int(answer), int(weight))
+# answer = input("Is it advantageous for this language to be high level? (0-100)\n")
+# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+# consultation["highlev"] = (int(answer), int(weight))
+
+
+
 # consequents of this system
-output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
+output_languages = ["C-language", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
 
 # creation of consequents
 def consequents():

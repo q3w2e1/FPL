@@ -1,11 +1,11 @@
 from skfuzzy import control as ctrl
-from deps.constants import consultation # as consultation
+from deps.constants_consul import consultation # as consultation
 
 def rules_experience(answer_yn, question_care, consequents):
     # Experience question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
-    # Searching for a language that does not require as much previous experience? 
+    # Searching for a language that does not require as much previous experience?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
-        consequents["c_lang"]['decent'],
+        consequents["C-language"]['decent'],
         consequents["cpp_lang"]['decent'],
         consequents["csharp_lang"]['good'],
         consequents["fortran_lang"]['mediocre'],
@@ -13,7 +13,7 @@ def rules_experience(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['decent'],
         consequents["python_lang"]['poor']))
     rule2 = ctrl.Rule(answer_yn['No'] & question_care['I do care'], (
-        consequents["c_lang"]['good'],
+        consequents["C-language"]['good'],
         consequents["cpp_lang"]['good'],
         consequents["csharp_lang"]['excellent'],
         consequents["fortran_lang"]['poor'],
@@ -21,7 +21,7 @@ def rules_experience(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['good'],
         consequents["python_lang"]['dismal']))
     rule3 = ctrl.Rule(answer_yn['I do not know'] & question_care['I do care'], (
-        consequents["c_lang"]['average'],
+        consequents["C-language"]['average'],
         consequents["cpp_lang"]['average'],
         consequents["csharp_lang"]['average'],
         consequents["fortran_lang"]['average'],
@@ -29,7 +29,7 @@ def rules_experience(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['average'],
         consequents["python_lang"]['average']))
     rule4 = ctrl.Rule(answer_yn['Yes'] & question_care['I do not care'], (
-        consequents["c_lang"]['mediocre'],
+        consequents["C-language"]['mediocre'],
         consequents["cpp_lang"]['mediocre'],
         consequents["csharp_lang"]['poor'],
         consequents["fortran_lang"]['decent'],
@@ -37,7 +37,7 @@ def rules_experience(answer_yn, question_care, consequents):
         consequents["pascal_lang"]['mediocre'],
         consequents["python_lang"]['good'],))
     rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
-        consequents["c_lang"]['poor'],
+        consequents["C-language"]['poor'],
         consequents["cpp_lang"]['poor'],
         consequents["csharp_lang"]['dismal'],
         consequents["fortran_lang"]['good'],
