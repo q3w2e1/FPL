@@ -1,5 +1,5 @@
 from skfuzzy import control as ctrl
-from constants import consultation
+from deps.constants import consultation
 
 def rules_highlev(answer_yn, question_care, consequents):
     # highlev question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
