@@ -8,3 +8,16 @@ consultation = {
 }
 
 output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
+
+# NOTE tips
+# mfs_dict["python_lang"]['average'].view()
+# question_care.view()
+# answer_yn.view()
+# MFs stages of automf 7:
+    #  |      * dismal
+    #  |      * poor
+    #  |      * mediocre
+    #  |      * average (always middle)
+    #  |      * decent
+    #  |      * good
+    #  |      * excellent
