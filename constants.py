@@ -21,3 +21,20 @@ output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_l
     #  |      * decent
     #  |      * good
     #  |      * excellent
+
+# print(question_experience_simulation.output)
+# print(question_OOP_simulation.output)
+# print(question_repos_simulation.output)
+# print(question_multi_simulation.output)
+# print(question_pointer_simulation.output)
+# print(question_highlev_simulation.output)
+
+# consequents["python_lang"].view(question_repos_simulation)
+# consequents["python_lang"].view(question_OOP_simulation)
+# consequents["python_lang"].view(question_multi_simulation)
+# consequents["python_lang"].view(question_pointer_simulation)
+# consequents["python_lang"].view(question_highlev_simulation)
+
+
+# question_care.view(question_OOP_simulation)
+# answer_yn.view(question_OOP_simulation)
