@@ -2,7 +2,8 @@ from skfuzzy import control as ctrl
 from deps.constants import consultation
 
 def rules_pointer(answer_yn, question_care, consequents):
-    # pointer question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
+    # pointer question --- "Hľadáte podporu pointerovej aritmetiky?"
+    # Do yoou want the language to support pointer Arithmetic? 
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['dismal'],
         consequents["cpp_lang"]['dismal'],

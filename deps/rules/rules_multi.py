@@ -2,7 +2,8 @@ from skfuzzy import control as ctrl
 from deps.constants import consultation
 
 def rules_multi(answer_yn, question_care, consequents):
-    # multi question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
+    # multi question --- "Hľadáte jazyk s Multithread možnosťami? "
+    # Do you need a language with multithread support?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['decent'],
         consequents["cpp_lang"]['decent'],

@@ -2,6 +2,7 @@ from skfuzzy import control as ctrl
 import numpy as np
 import skfuzzy as fuzz
 
+# these are answers of the reader/user
 consultation = {
     "experience" : (100, 100),
     "OOP" : (10, 70),
@@ -11,8 +12,10 @@ consultation = {
     "highlev" : (20, 80)
 }
 
+# consequents of this system
 output_languages = ["c_lang", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
 
+# creation of consequents
 def consequents():
     # creation of membership functions of consequents
     consequents = {}
@@ -24,6 +27,7 @@ def consequents():
         consequents[key].automf(7)
     return consequents
 
+# creation of antecedents
 def antecedents():
     # creation of antecedents - 2 input characteristics (answer_yn, question_care)
     answer_yn = ctrl.Antecedent(np.arange(0, 100, 1), 'answer_yn')
@@ -35,7 +39,7 @@ def antecedents():
     return (answer_yn, question_care)
 
 
-# NOTE tips
+# NOTE tips --- ignore
 # mfs_dict["python_lang"]['average'].view()
 # question_care.view()
 # answer_yn.view()

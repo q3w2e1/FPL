@@ -3,6 +3,7 @@ from deps.constants import consultation # as consultation
 
 def rules_experience(answer_yn, question_care, consequents):
     # Experience question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
+    # Searching for a language that does not require as much previous experience? 
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['decent'],
         consequents["cpp_lang"]['decent'],

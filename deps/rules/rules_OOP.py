@@ -3,6 +3,7 @@ from deps.constants import consultation
 
 def rules_OOP(answer_yn, question_care, consequents):
     # OOP question --- "Hľadáte support OOP?"
+    # Do you need OOP (object oriented programming) support? 
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['good'],
         consequents["cpp_lang"]['poor'],

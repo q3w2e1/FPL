@@ -2,7 +2,8 @@ from skfuzzy import control as ctrl
 from deps.constants import consultation
 
 def rules_highlev(answer_yn, question_care, consequents):
-    # highlev question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
+    # highlev question --- "Je pre vás výhodou viac high level jazyk? "
+    # Is it advantageous for this language to be high level?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['dismal'],
         consequents["cpp_lang"]['mediocre'],

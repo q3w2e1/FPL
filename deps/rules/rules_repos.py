@@ -3,6 +3,7 @@ from deps.constants import consultation
 
 def rules_repos(answer_yn, question_care, consequents):
     # repos question --- "Záleží vám na počte online repozitárov pod záštitom daného jazyka?"
+    # Do you care about the number of programming repositories that the language has? 
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["c_lang"]['good'],
         consequents["cpp_lang"]['poor'],
