@@ -2,41 +2,41 @@ from skfuzzy import control as ctrl
 import numpy as np
 import skfuzzy as fuzz
 
-# mimicking answers of the reader/user
-consultation = {
-    "experience" : (5, 50),
-    "OOP" : (10, 20),
-    "repos" : (50, 40),
-    "multi" : (13, 20),
-    "pointer" : (50, 15),
-    "highlev" : (20, 80)
-}
+# # mimicking answers of the reader/user
+# consultation = {
+#     "experience" : (100, 100),
+#     "OOP" : (100, 100),
+#     "repos" : (90, 100),
+#     "multi" : (13, 20),
+#     "pointer" : (50, 15),
+#     "highlev" : (80, 80)
+# }
 
 # alternative consulation (input from keyboard)
-# consultation = {}
-# answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["experience"] = (int(answer), int(weight))
-# answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["OOP"] = (int(answer), int(weight))
-# answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["repos"] = (int(answer), int(weight))
-# answer = input("Do you need a language with multithread support? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["multi"] = (int(answer), int(weight))
-# answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["pointer"] = (int(answer), int(weight))
-# answer = input("Is it advantageous for this language to be high level? (0-100)\n")
-# weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-# consultation["highlev"] = (int(answer), int(weight))
+consultation = {}
+answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["experience"] = (int(answer), int(weight))
+answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["OOP"] = (int(answer), int(weight))
+answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["repos"] = (int(answer), int(weight))
+answer = input("Do you need a language with multithread support? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["multi"] = (int(answer), int(weight))
+answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["pointer"] = (int(answer), int(weight))
+answer = input("Is it advantageous for this language to be high level? (0-100)\n")
+weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+consultation["highlev"] = (int(answer), int(weight))
 
 
 
 # consequents of this system
-output_languages = ["C-language", "cpp_lang", "csharp_lang", "fortran_lang", "java_lang", "pascal_lang", "python_lang"]
+output_languages = ["C", "C++", "C#", "Fortran", "Java", "Pascal", "Python"]
 
 # creation of consequents
 def consequents():
@@ -63,7 +63,7 @@ def antecedents():
 
 
 # NOTE tips --- ignore
-# mfs_dict["python_lang"]['average'].view()
+# mfs_dict["Python"]['average'].view()
 # question_care.view()
 # answer_yn.view()
 # MFs stages of automf 7:
@@ -82,11 +82,11 @@ def antecedents():
 # print(question_pointer_simulation.output)
 # print(question_highlev_simulation.output)
 
-# consequents["python_lang"].view(question_repos_simulation)
-# consequents["python_lang"].view(question_OOP_simulation)
-# consequents["python_lang"].view(question_multi_simulation)
-# consequents["python_lang"].view(question_pointer_simulation)
-# consequents["python_lang"].view(question_highlev_simulation)
+# consequents["Python"].view(question_repos_simulation)
+# consequents["Python"].view(question_OOP_simulation)
+# consequents["Python"].view(question_multi_simulation)
+# consequents["Python"].view(question_pointer_simulation)
+# consequents["Python"].view(question_highlev_simulation)
 
 
 # question_care.view(question_OOP_simulation)

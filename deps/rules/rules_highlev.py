@@ -5,45 +5,45 @@ def rules_highlev(answer_yn, question_care, consequents):
     # highlev question --- "Je pre vás výhodou viac high level jazyk? "
     # Is it advantageous for this language to be high level?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
-        consequents["C-language"]['dismal'],
-        consequents["cpp_lang"]['mediocre'],
-        consequents["csharp_lang"]['mediocre'],
-        consequents["fortran_lang"]['good'],
-        consequents["java_lang"]['mediocre'],
-        consequents["pascal_lang"]['average'],
-        consequents["python_lang"]['poor']))
+        consequents["C"]['dismal'],
+        consequents["C++"]['mediocre'],
+        consequents["C#"]['mediocre'],
+        consequents["Fortran"]['good'],
+        consequents["Java"]['mediocre'],
+        consequents["Pascal"]['average'],
+        consequents["Python"]['poor']))
     rule2 = ctrl.Rule(answer_yn['No'] & question_care['I do care'], (
-        consequents["C-language"]['decent'],
-        consequents["cpp_lang"]['poor'],
-        consequents["csharp_lang"]['poor'],
-        consequents["fortran_lang"]['mediocre'],
-        consequents["java_lang"]['poor'],
-        consequents["pascal_lang"]['mediocre'],
-        consequents["python_lang"]['dismal']))
+        consequents["C"]['decent'],
+        consequents["C++"]['poor'],
+        consequents["C#"]['poor'],
+        consequents["Fortran"]['mediocre'],
+        consequents["Java"]['poor'],
+        consequents["Pascal"]['mediocre'],
+        consequents["Python"]['dismal']))
     rule3 = ctrl.Rule(answer_yn['I do not know'] & question_care['I do care'], (
-        consequents["C-language"]['average'],
-        consequents["cpp_lang"]['average'],
-        consequents["csharp_lang"]['average'],
-        consequents["fortran_lang"]['average'],
-        consequents["java_lang"]['average'],
-        consequents["pascal_lang"]['average'],
-        consequents["python_lang"]['average']))
+        consequents["C"]['average'],
+        consequents["C++"]['average'],
+        consequents["C#"]['average'],
+        consequents["Fortran"]['average'],
+        consequents["Java"]['average'],
+        consequents["Pascal"]['average'],
+        consequents["Python"]['average']))
     rule4 = ctrl.Rule(answer_yn['Yes'] & question_care['I do not care'], (
-        consequents["C-language"]['good'],
-        consequents["cpp_lang"]['decent'],
-        consequents["csharp_lang"]['decent'],
-        consequents["fortran_lang"]['dismal'],
-        consequents["java_lang"]['decent'],
-        consequents["pascal_lang"]['average'],
-        consequents["python_lang"]['good'],))
+        consequents["C"]['good'],
+        consequents["C++"]['decent'],
+        consequents["C#"]['decent'],
+        consequents["Fortran"]['dismal'],
+        consequents["Java"]['decent'],
+        consequents["Pascal"]['average'],
+        consequents["Python"]['good'],))
     rule5 = ctrl.Rule(answer_yn['Yes'] & question_care['I do care'], (
-        consequents["C-language"]['mediocre'],
-        consequents["cpp_lang"]['good'],
-        consequents["csharp_lang"]['good'],
-        consequents["fortran_lang"]['decent'],
-        consequents["java_lang"]['good'],
-        consequents["pascal_lang"]['decent'],
-        consequents["python_lang"]['excellent']))
+        consequents["C"]['mediocre'],
+        consequents["C++"]['good'],
+        consequents["C#"]['good'],
+        consequents["Fortran"]['decent'],
+        consequents["Java"]['good'],
+        consequents["Pascal"]['decent'],
+        consequents["Python"]['excellent']))
 
     ctrl_highlev = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
     question_highlev_simulation = ctrl.ControlSystemSimulation(ctrl_highlev, clip_to_bounds=True, flush_after_run=100)
@@ -52,7 +52,7 @@ def rules_highlev(answer_yn, question_care, consequents):
     question_highlev_simulation.input['question_care'] = consultation["highlev"][1]
     try:
         question_highlev_simulation.compute()
-        # consequents["python_lang"].view(sim=question_highlev_simulation)
+        # consequents["Python"].view(sim=question_highlev_simulation)
     except:
         print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
 

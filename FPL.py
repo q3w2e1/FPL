@@ -41,13 +41,13 @@ def main():
     for i in final_score:
         final_score_normalised[i] = final_score[i] / len(constants_consul.consultation)
 
-    # print the results of each consequent
+    # # print the results of each consequent
     # pprint.pprint(final_score_normalised, width=1)
 
-    for key in sorted(final_score_normalised.keys()):
-        print(f"\nYou might consider to start with {key}.")
-        break
-        print(key, final_score_normalised[key])
+    # calculation descending order of dictionary by value and storing result in a list
+    sorted_score = sorted(final_score_normalised.items(), key=lambda x: x[1], reverse=True)
+
+    print(f"You might consider to start with {sorted_score[0][0]}.")
 
 
 if __name__ == '__main__':
