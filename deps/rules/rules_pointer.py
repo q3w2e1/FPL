@@ -1,7 +1,6 @@
 from skfuzzy import control as ctrl
-from deps.constants_consul import consultation
 
-def rules_pointer(answer_yn, question_care, consequents):
+def rules_pointer(answer_yn, question_care, consequents, consultation):
     # pointer question --- "Hľadáte podporu pointerovej aritmetiky?"
     # Do you want the language to support pointer Arithmetic?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (

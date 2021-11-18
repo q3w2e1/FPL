@@ -1,7 +1,6 @@
 from skfuzzy import control as ctrl
-from deps.constants_consul import consultation # as consultation
 
-def rules_experience(answer_yn, question_care, consequents):
+def rules_experience(answer_yn, question_care, consequents, consultation):
     # Experience question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
     # Searching for a language that does not require as much previous experience?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (

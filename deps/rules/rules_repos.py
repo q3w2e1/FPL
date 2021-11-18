@@ -1,7 +1,6 @@
 from skfuzzy import control as ctrl
-from deps.constants_consul import consultation
 
-def rules_repos(answer_yn, question_care, consequents):
+def rules_repos(answer_yn, question_care, consequents, consultation):
     # repos question --- "Záleží vám na počte online repozitárov pod záštitom daného jazyka?"
     # Do you care about the number of programming repositories that the language has?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (

@@ -1,7 +1,6 @@
 from skfuzzy import control as ctrl
-from deps.constants_consul import consultation
 
-def rules_OOP(answer_yn, question_care, consequents):
+def rules_OOP(answer_yn, question_care, consequents, consultation):
     # OOP question --- "Hľadáte support OOP?"
     # Do you need OOP (object oriented programming) support?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (

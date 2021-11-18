@@ -1,5 +1,6 @@
 from kivy.lang import Builder
 from kivymd.app import MDApp
+from FPL import FPL
 
 class FPL_sys(MDApp):
     state = 0
@@ -45,9 +46,9 @@ class FPL_sys(MDApp):
             self.state = 6
             self.GUIconsultation["highlev"] = (int(self.root.ids.slider0.value),
                                                int(self.root.ids.slider1.value))
-            # here you do the cmputation, as you've gained consultation values
-            print(self.GUIconsultation)
-            self.root.ids.question.text = "Language you should learn is:"
+            # here you do the computation, as you've gained consultation values
+            # print(self.GUIconsultation)
+            self.root.ids.question.text = f"You might consider to start with {FPL(self.GUIconsultation)}"
             self.root.ids.question_number.title = "Result"
 
             self.root.ids.apply_next.text = "Quit"

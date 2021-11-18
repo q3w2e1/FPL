@@ -1,7 +1,6 @@
 from skfuzzy import control as ctrl
-from deps.constants_consul import consultation
 
-def rules_highlev(answer_yn, question_care, consequents):
+def rules_highlev(answer_yn, question_care, consequents, consultation):
     # highlev question --- "Je pre vás výhodou viac high level jazyk? "
     # Is it advantageous for this language to be high level?
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
