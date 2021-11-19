@@ -6,3 +6,6 @@ sometimes need the feeling of heading the right direction. This system mimics re
 Out of X characteristics, only 6 has been chosen to be a part of this deciding system.
 
 Technically it is an expert system with 6 questions, 2 antecedent (input preferences based on a question) for each question and 7 final consequents (hypotheses/languages). It is implemented in fuzzy logic using the scikit-fuzzy package.
+
+# How to run
+FPL.py and gui_kivy.py are both ready to be run by Python. FPL.py proposes command-line interface, gui_kivy.py has its own GUI to the same functionality. In the "dist" folder, there is an executable if you don't have Python installed on your computer (please, run with the respective .kv file in the same directory).
