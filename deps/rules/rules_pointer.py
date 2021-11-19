@@ -1,4 +1,5 @@
 from skfuzzy import control as ctrl
+from ..constants_consul import simulation_by_question
 
 def rules_pointer(answer_yn, question_care, consequents, consultation):
     """ pointer question ---
@@ -46,15 +47,6 @@ def rules_pointer(answer_yn, question_care, consequents, consultation):
         consequents["Pascal"]['average'],
         consequents["Python"]['dismal']))
 
-    ctrl_pointer = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_pointer_simulation = ctrl.ControlSystemSimulation(ctrl_pointer, clip_to_bounds=True, flush_after_run=100)
-
-    question_pointer_simulation.input['answer_yn'] = consultation["pointer"][0]
-    question_pointer_simulation.input['question_care'] = consultation["pointer"][1]
-    
-    try:
-        question_pointer_simulation.compute()
-    except:
-        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
-
-    return question_pointer_simulation
+    rules_list = [rule1, rule2, rule3, rule4, rule5]
+    sim = simulation_by_question(rules_list, "pointer", consultation)
+    return sim

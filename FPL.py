@@ -1,87 +1,72 @@
-import numpy as np
-import skfuzzy as fuzz
-from skfuzzy import control as ctrl
-import pprint
+from kivy.lang import Builder
+from kivymd.app import MDApp
+from FPL_cmd import FPL_compute
 
-from deps import constants_consul
+class FPL_sys(MDApp):
+    # state of the consultation according to the question being asked
+    state = 0
+    # values from sliders will be stored here
+    GUIconsultation = {}
 
-from deps.rules.rules_experience import rules_experience
-from deps.rules.rules_OOP import rules_OOP
-from deps.rules.rules_repos import rules_repos
-from deps.rules.rules_multi import rules_multi
-from deps.rules.rules_pointer import rules_pointer
-from deps.rules.rules_highlev import rules_highlev
+    def build(self):
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "Gray"
+        self.theme_cls.accent_palette = 'Gray'
+        return Builder.load_file('deps\FPL_kivy.kv')
 
-def FPL(consul):
-    # consequents of this system
-    output_languages = ["C", "C++", "C#", "Fortran", "Java", "Pascal", "Python"]
+    def apply_next(self):
+        """apply_next (id) button being pushed
+            - slider values are being recorded into GUIconsultation dictionary
+        """
+        if self.state == 0:
+            self.state = 1
+            self.root.ids.question.text = "Do you need OOP (object oriented programming) support?"
+            self.root.ids.question_number.title = "Question number 2:"
+            self.GUIconsultation["experience"] = (int(self.root.ids.slider0.value),
+                                                  int(self.root.ids.slider1.value))
+        elif self.state == 1:
+            self.state = 2
+            self.root.ids.question.text = "Do you care about the number of programming repositories that the language has?"
+            self.root.ids.question_number.title = "Question number 3:"
+            self.GUIconsultation["OOP"] = (int(self.root.ids.slider0.value),
+                                           int(self.root.ids.slider1.value))
+        elif self.state == 2:
+            self.state = 3
+            self.root.ids.question.text = "Do you need a language with multithread support?"
+            self.root.ids.question_number.title = "Question number 4:"
+            self.GUIconsultation["repos"] = (int(self.root.ids.slider0.value),
+                                             int(self.root.ids.slider1.value))
+        elif self.state == 3:
+            self.state = 4
+            self.root.ids.question.text = "Do you want the language to support pointer arithmetic?"
+            self.root.ids.question_number.title = "Question number 5:"
+            self.GUIconsultation["multi"] = (int(self.root.ids.slider0.value),
+                                             int(self.root.ids.slider1.value))
+        elif self.state == 4:
+            self.state = 5
+            self.root.ids.question.text = "Is it advantageous for this language to be high level?"
+            self.root.ids.question_number.title = "Question number 6:"
+            self.GUIconsultation["pointer"] = (int(self.root.ids.slider0.value),
+                                               int(self.root.ids.slider1.value))
+        elif self.state == 5:
+            self.state = 6
+            self.GUIconsultation["highlev"] = (int(self.root.ids.slider0.value),
+                                               int(self.root.ids.slider1.value))
 
-    # creation of membership functions of consequents (7) and antecedents (2)
-    conseqs = constants_consul.consequents(output_languages)
-    answer_yn, question_care = constants_consul.antecedents()
+            # here the computation takes place, as the consultation values are known
+            self.root.ids.question.text = f"You might consider to start with {FPL_compute(self.GUIconsultation)}"
+            self.root.ids.question_number.title = "Result"
 
-    # creation of simulations for each question and application of consultation answers
-    question_experience_simulation = rules_experience(answer_yn, question_care, conseqs, consul)
-    question_OOP_simulation = rules_OOP(answer_yn, question_care, conseqs, consul)
-    question_repos_simulation = rules_repos(answer_yn, question_care, conseqs, consul)
-    question_multi_simulation = rules_multi(answer_yn, question_care, conseqs, consul)
-    question_pointer_simulation = rules_pointer(answer_yn, question_care, conseqs, consul)
-    question_highlev_simulation = rules_highlev(answer_yn, question_care, conseqs, consul)
+            self.root.ids.apply_next.text = "Quit"
+            self.root.ids.slider1.disabled = True
+            self.root.ids.slider0.disabled = True
+            self.root.ids.slider1_name.theme_text_color = "Secondary"
+            self.root.ids.slider0_name.theme_text_color = "Secondary"
+        else:
+            self.stop()
 
-    # summing of the results from each question
-    final_score = {}
-    for lang in output_languages:
-        final_score[lang] = question_experience_simulation.output[lang] \
-                            + question_OOP_simulation.output[lang] \
-                            + question_repos_simulation.output[lang] \
-                            + question_multi_simulation.output[lang] \
-                            + question_pointer_simulation.output[lang] \
-                            + question_highlev_simulation.output[lang]
+        # resetting slider values after each question is answered
+        self.root.ids.slider0.value = 27
+        self.root.ids.slider1.value = 27
 
-    # averaging the results into 0-100 boundaries
-    final_score_normalised = {}
-    for i in final_score:
-        final_score_normalised[i] = final_score[i] / len(consul)
-
-    # calculation descending order of resulting consequents by value and storing result in a list
-    sorted_score = sorted(final_score_normalised.items(), key=lambda x: x[1], reverse=True)
-    resulting_highscore = sorted_score[0][0]
-    return resulting_highscore
-
-
-if __name__ == '__main__':
-    choice = input("Press 'y' to resume with interactive consultation, or 'n' to generate consultation from pre-prepared script\n")
-
-    if choice == 'y':
-        # interactive consulation (input from the keyboard)
-        consultation = {}
-        answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["experience"] = (int(answer), int(weight))
-        answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["OOP"] = (int(answer), int(weight))
-        answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["repos"] = (int(answer), int(weight))
-        answer = input("Do you need a language with multithread support? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["multi"] = (int(answer), int(weight))
-        answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["pointer"] = (int(answer), int(weight))
-        answer = input("Is it advantageous for this language to be high level? (0-100)\n")
-        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-        consultation["highlev"] = (int(answer), int(weight))
-    else:
-        # mimicking answers of the reader/user
-        consultation = {
-            "experience" : (0, 100),
-            "OOP" : (0, 100),
-            "repos" : (50, 50),
-            "multi" : (50, 50),
-            "pointer" : (0, 100),
-            "highlev" : (100, 100)
-        }
-
-    print(f"You might consider to start with {FPL(consultation)}.")
+FPL_sys().run()

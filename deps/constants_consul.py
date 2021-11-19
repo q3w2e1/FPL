@@ -24,3 +24,18 @@ def antecedents():
     question_care['I do care'] = fuzz.trimf(question_care.universe, [45, 100, 100])
     question_care['I do not care'] = fuzz.trimf(question_care.universe, [0, 0, 55])
     return (answer_yn, question_care)
+
+
+def simulation_by_question(rules_list, question, consultation):
+    ctrl_sys = ctrl.ControlSystem([rules_list[0], rules_list[1], rules_list[2],
+                                   rules_list[3], rules_list[4]])
+    simulation = ctrl.ControlSystemSimulation(ctrl_sys, clip_to_bounds=True, flush_after_run=100)
+
+    simulation.input['answer_yn'] = consultation[question][0]
+    simulation.input['question_care'] = consultation[question][1]
+
+    try:
+        simulation.compute()
+    except:
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
+    return simulation

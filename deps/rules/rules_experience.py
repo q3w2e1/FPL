@@ -1,4 +1,5 @@
 from skfuzzy import control as ctrl
+from ..constants_consul import simulation_by_question
 
 def rules_experience(answer_yn, question_care, consequents, consultation):
     """ experience question ---
@@ -45,16 +46,7 @@ def rules_experience(answer_yn, question_care, consequents, consultation):
         consequents["Java"]['dismal'],
         consequents["Pascal"]['poor'],
         consequents["Python"]['excellent']))
-
-    ctrl_experience = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_experience_simulation = ctrl.ControlSystemSimulation(ctrl_experience, clip_to_bounds=True, flush_after_run=100)
-
-    question_experience_simulation.input['answer_yn'] = consultation["experience"][0]
-    question_experience_simulation.input['question_care'] = consultation["experience"][1]
-
-    try:
-        question_experience_simulation.compute()
-    except:
-        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
-
-    return question_experience_simulation
+        
+    rules_list = [rule1, rule2, rule3, rule4, rule5]
+    sim = simulation_by_question(rules_list, "experience", consultation)
+    return sim

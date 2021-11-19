@@ -1,4 +1,5 @@
 from skfuzzy import control as ctrl
+from ..constants_consul import simulation_by_question
 
 def rules_OOP(answer_yn, question_care, consequents, consultation):
     """ OOP question ---
@@ -46,15 +47,6 @@ def rules_OOP(answer_yn, question_care, consequents, consultation):
         consequents["Pascal"]['dismal'],
         consequents["Python"]['excellent']))
 
-    ctrl_OOP = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_OOP_simulation = ctrl.ControlSystemSimulation(ctrl_OOP, clip_to_bounds=True, flush_after_run=100)
-
-    question_OOP_simulation.input['answer_yn'] = consultation["OOP"][0]
-    question_OOP_simulation.input['question_care'] = consultation["OOP"][1]
-
-    try:
-        question_OOP_simulation.compute()
-    except:
-        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
-
-    return question_OOP_simulation
+    rules_list = [rule1, rule2, rule3, rule4, rule5]
+    sim = simulation_by_question(rules_list, "OOP", consultation)
+    return sim

@@ -1,4 +1,5 @@
 from skfuzzy import control as ctrl
+from ..constants_consul import simulation_by_question
 
 def rules_repos(answer_yn, question_care, consequents, consultation):
     """ repos question ---
@@ -46,15 +47,6 @@ def rules_repos(answer_yn, question_care, consequents, consultation):
         consequents["Pascal"]['dismal'],
         consequents["Python"]['decent']))
 
-    ctrl_repos = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_repos_simulation = ctrl.ControlSystemSimulation(ctrl_repos, clip_to_bounds=True, flush_after_run=100)
-
-    question_repos_simulation.input['answer_yn'] = consultation["repos"][0]
-    question_repos_simulation.input['question_care'] = consultation["repos"][1]
-
-    try:
-        question_repos_simulation.compute()
-    except:
-        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
-
-    return question_repos_simulation
+    rules_list = [rule1, rule2, rule3, rule4, rule5]
+    sim = simulation_by_question(rules_list, "repos", consultation)
+    return sim

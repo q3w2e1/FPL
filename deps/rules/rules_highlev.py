@@ -1,4 +1,5 @@
 from skfuzzy import control as ctrl
+from ..constants_consul import simulation_by_question
 
 def rules_highlev(answer_yn, question_care, consequents, consultation):
     """ highlev question ---
@@ -46,15 +47,6 @@ def rules_highlev(answer_yn, question_care, consequents, consultation):
         consequents["Pascal"]['decent'],
         consequents["Python"]['excellent']))
 
-    ctrl_highlev = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_highlev_simulation = ctrl.ControlSystemSimulation(ctrl_highlev, clip_to_bounds=True, flush_after_run=100)
-
-    question_highlev_simulation.input['answer_yn'] = consultation["highlev"][0]
-    question_highlev_simulation.input['question_care'] = consultation["highlev"][1]
-    
-    try:
-        question_highlev_simulation.compute()
-    except:
-        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
-
-    return question_highlev_simulation
+    rules_list = [rule1, rule2, rule3, rule4, rule5]
+    sim = simulation_by_question(rules_list, "highlev", consultation)
+    return sim
