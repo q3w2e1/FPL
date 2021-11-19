@@ -1,8 +1,10 @@
 from skfuzzy import control as ctrl
 
 def rules_pointer(answer_yn, question_care, consequents, consultation):
-    # pointer question --- "Hľadáte podporu pointerovej aritmetiky?"
-    # Do you want the language to support pointer Arithmetic?
+    """ pointer question ---
+    Hľadáte podporu pointerovej aritmetiky?
+    Do you want the language to support pointer Arithmetic?
+    """
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["C"]['dismal'],
         consequents["C++"]['dismal'],
@@ -49,10 +51,10 @@ def rules_pointer(answer_yn, question_care, consequents, consultation):
 
     question_pointer_simulation.input['answer_yn'] = consultation["pointer"][0]
     question_pointer_simulation.input['question_care'] = consultation["pointer"][1]
+    
     try:
         question_pointer_simulation.compute()
-        # consequents["Python"].view(sim=question_pointer_simulation)
     except:
-        print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
 
     return question_pointer_simulation

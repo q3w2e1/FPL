@@ -1,8 +1,10 @@
 from skfuzzy import control as ctrl
 
 def rules_multi(answer_yn, question_care, consequents, consultation):
-    # multi question --- "Hľadáte jazyk s Multithread možnosťami? "
-    # Do you need a language with multithread support?
+    """ multi question ---
+    Hľadáte jazyk s Multithread možnosťami?
+    Do you need a language with multithread support?
+    """
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["C"]['decent'],
         consequents["C++"]['decent'],
@@ -49,10 +51,10 @@ def rules_multi(answer_yn, question_care, consequents, consultation):
 
     question_multi_simulation.input['answer_yn'] = consultation["multi"][0]
     question_multi_simulation.input['question_care'] = consultation["multi"][1]
+    
     try:
         question_multi_simulation.compute()
-        # consequents["Python"].view(sim=question_multi_simulation)
     except:
-        print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
 
     return question_multi_simulation

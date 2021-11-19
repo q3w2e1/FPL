@@ -20,7 +20,7 @@ def FPL(consul):
     conseqs = constants_consul.consequents(output_languages)
     answer_yn, question_care = constants_consul.antecedents()
 
-    # created simulations for each question and applied consultation answers
+    # creation of simulations for each question and application of consultation answers
     question_experience_simulation = rules_experience(answer_yn, question_care, conseqs, consul)
     question_OOP_simulation = rules_OOP(answer_yn, question_care, conseqs, consul)
     question_repos_simulation = rules_repos(answer_yn, question_care, conseqs, consul)
@@ -39,49 +39,49 @@ def FPL(consul):
                             + question_highlev_simulation.output[lang]
 
     # averaging the results into 0-100 boundaries
-    # len(consultation) represents number of questions asked
     final_score_normalised = {}
     for i in final_score:
         final_score_normalised[i] = final_score[i] / len(consul)
 
-    # # print the results of each consequent
-    # pprint.pprint(final_score_normalised, width=1)
-
-    # calculation descending order of dictionary by value and storing result in a list
+    # calculation descending order of resulting consequents by value and storing result in a list
     sorted_score = sorted(final_score_normalised.items(), key=lambda x: x[1], reverse=True)
     resulting_highscore = sorted_score[0][0]
     return resulting_highscore
 
 
 if __name__ == '__main__':
-    # mimicking answers of the reader/user
-    consultation = {
-        "experience" : (100, 100),
-        "OOP" : (100, 100),
-        "repos" : (50, 50),
-        "multi" : (50, 50),
-        "pointer" : (0, 100),
-        "highlev" : (100, 100)
-    }
-    # # alternative consulation (input from keyboard)
-    # consultation = {}
-    # answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["experience"] = (int(answer), int(weight))
-    # answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["OOP"] = (int(answer), int(weight))
-    # answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["repos"] = (int(answer), int(weight))
-    # answer = input("Do you need a language with multithread support? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["multi"] = (int(answer), int(weight))
-    # answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["pointer"] = (int(answer), int(weight))
-    # answer = input("Is it advantageous for this language to be high level? (0-100)\n")
-    # weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
-    # consultation["highlev"] = (int(answer), int(weight))
+    choice = input("Press 'y' to resume with interactive consultation, or 'n' to generate consultation from pre-prepared script\n")
+
+    if choice == 'y':
+        # interactive consulation (input from the keyboard)
+        consultation = {}
+        answer = input("Are you searching for a language that does not require as much previous experience? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["experience"] = (int(answer), int(weight))
+        answer = input("Do you need OOP (object oriented programming) support? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["OOP"] = (int(answer), int(weight))
+        answer = input("Do you care about the number of programming repositories that the language has? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["repos"] = (int(answer), int(weight))
+        answer = input("Do you need a language with multithread support? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["multi"] = (int(answer), int(weight))
+        answer = input("Do you want the language to support pointer arithmetic? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["pointer"] = (int(answer), int(weight))
+        answer = input("Is it advantageous for this language to be high level? (0-100)\n")
+        weight = input("How much weight do you want to add to that question and answer? (0-100)\n")
+        consultation["highlev"] = (int(answer), int(weight))
+    else:
+        # mimicking answers of the reader/user
+        consultation = {
+            "experience" : (0, 100),
+            "OOP" : (0, 100),
+            "repos" : (50, 50),
+            "multi" : (50, 50),
+            "pointer" : (0, 100),
+            "highlev" : (100, 100)
+        }
 
     print(f"You might consider to start with {FPL(consultation)}.")

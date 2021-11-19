@@ -1,8 +1,10 @@
 from skfuzzy import control as ctrl
 
 def rules_experience(answer_yn, question_care, consequents, consultation):
-    # Experience question --- "Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?"
-    # Searching for a language that does not require as much previous experience?
+    """ experience question ---
+    Hľadáte jazyk ktorého učenie nevyžaduje predchádzajúce skúsenosti?
+    Are you searching for a language that does not require as much previous experience?
+    """
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["C"]['decent'],
         consequents["C++"]['decent'],
@@ -45,15 +47,14 @@ def rules_experience(answer_yn, question_care, consequents, consultation):
         consequents["Python"]['excellent']))
 
     ctrl_experience = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5])
-    question_experience_simulation = ctrl.ControlSystemSimulation(ctrl_experience, flush_after_run=100)
+    question_experience_simulation = ctrl.ControlSystemSimulation(ctrl_experience, clip_to_bounds=True, flush_after_run=100)
 
     question_experience_simulation.input['answer_yn'] = consultation["experience"][0]
     question_experience_simulation.input['question_care'] = consultation["experience"][1]
 
     try:
         question_experience_simulation.compute()
-        # consequents["Python"].view(sim=question_experience_simulation)
     except:
-        print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
 
     return question_experience_simulation

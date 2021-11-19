@@ -1,8 +1,10 @@
 from skfuzzy import control as ctrl
 
 def rules_OOP(answer_yn, question_care, consequents, consultation):
-    # OOP question --- "Hľadáte support OOP?"
-    # Do you need OOP (object oriented programming) support?
+    """ OOP question ---
+    Hľadáte support OOP?
+    Do you need OOP (object oriented programming) support?
+    """
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["C"]['good'],
         consequents["C++"]['poor'],
@@ -52,8 +54,7 @@ def rules_OOP(answer_yn, question_care, consequents, consultation):
 
     try:
         question_OOP_simulation.compute()
-        # consequents["Python"].view(sim=question_OOP_simulation)
     except:
-        print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
 
     return question_OOP_simulation

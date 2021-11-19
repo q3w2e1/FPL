@@ -1,8 +1,10 @@
 from skfuzzy import control as ctrl
 
 def rules_repos(answer_yn, question_care, consequents, consultation):
-    # repos question --- "Záleží vám na počte online repozitárov pod záštitom daného jazyka?"
-    # Do you care about the number of programming repositories that the language has?
+    """ repos question ---
+    Záleží vám na počte online repozitárov pod záštitom daného jazyka?
+    Do you care about the number of programming repositories that the language has?
+    """
     rule1 = ctrl.Rule(answer_yn['No'] & question_care['I do not care'], (
         consequents["C"]['good'],
         consequents["C++"]['poor'],
@@ -52,8 +54,7 @@ def rules_repos(answer_yn, question_care, consequents, consultation):
 
     try:
         question_repos_simulation.compute()
-        # consequents["Python"].view(sim=question_repos_simulation)
     except:
-        print("The system could not propely decide due to insufficient input decision data. In other words, you decided to answer 'I do not know', to everything.")
+        print("The system could not properly decide due to insufficient input decision data. In other words, you probably decided to answer 'I do not know', to everything.")
 
     return question_repos_simulation

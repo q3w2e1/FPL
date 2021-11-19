@@ -3,8 +3,11 @@ from kivymd.app import MDApp
 from FPL import FPL
 
 class FPL_sys(MDApp):
+    # state of the consultation according to the question being asked
     state = 0
+    # values from sliders will be stored here
     GUIconsultation = {}
+
     def build(self):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Gray"
@@ -12,6 +15,9 @@ class FPL_sys(MDApp):
         return Builder.load_file('FPL_kivy.kv')
 
     def apply_next(self):
+        """apply_next (id) button being pushed
+            - slider values are being recorded into GUIconsultation dictionary
+        """
         if self.state == 0:
             self.state = 1
             self.root.ids.question.text = "Do you need OOP (object oriented programming) support?"
@@ -46,8 +52,8 @@ class FPL_sys(MDApp):
             self.state = 6
             self.GUIconsultation["highlev"] = (int(self.root.ids.slider0.value),
                                                int(self.root.ids.slider1.value))
-            # here you do the computation, as you've gained consultation values
-            # print(self.GUIconsultation)
+
+            # here the computation takes place, as the consultation values are known
             self.root.ids.question.text = f"You might consider to start with {FPL(self.GUIconsultation)}"
             self.root.ids.question_number.title = "Result"
 
@@ -59,8 +65,8 @@ class FPL_sys(MDApp):
         else:
             self.stop()
 
+        # resetting slider values after each question is answered
         self.root.ids.slider0.value = 27
         self.root.ids.slider1.value = 27
-
 
 FPL_sys().run()
