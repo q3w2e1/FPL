@@ -46,7 +46,16 @@ def rules_experience(answer_yn, question_care, consequents, consultation):
         consequents["Java"]['dismal'],
         consequents["Pascal"]['poor'],
         consequents["Python"]['excellent']))
-        
+
     rules_list = [rule1, rule2, rule3, rule4, rule5]
     sim = simulation_by_question(rules_list, "experience", consultation)
+    # XXX # visualisation of process and outcome
+    # consequents["Python"].view(sim)
+    # answer_yn['No'].view(sim)
+    # answer_yn['Yes'].view(sim)
+    # answer_yn['I do not know'].view(sim)
+    # question_care['I do care'].view(sim)
+    # question_care['I do not care'].view(sim)
+    # input("waiting\n")
+    # XXX #
     return sim
